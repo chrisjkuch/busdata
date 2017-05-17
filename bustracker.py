@@ -77,9 +77,11 @@ class BusTracker:
         self.bus_ids = list(self.buses.keys())
         for bus in self.bus_ids:
             self.last_stops[bus] = self.buses[bus]['lastStop']
-            if self.verbose: print(self.buses[bus]['name'] + ' is on route ' + 
-                str(self.buses[bus]['route']) + ' with id ' + str(bus) + 
-                ' and last stop was ' + str(self.buses[bus]['lastStop']))
+            if self.verbose: 
+                print(self.buses[bus]['name'] + ' (' + str(bus) + ') is on route ' + 
+                    self.routes[self.buses[bus]['route']]['name'] + ' (' + str(self.buses[bus]['route']) + ')' +
+                    ' and last stop was ' + self.stops[self.buses[bus]['lastStop']]['name'] + 
+                    ' (' + str(self.buses[bus]['lastStop']) + ')')
                 
     def record_stop(self, bus_id, stop_id):
         ''' Record the stop in the output file '''
@@ -122,7 +124,7 @@ class BusTracker:
     
 def main():
     ''' Standalone run function '''
-    tracker = BusTracker('northwestern', verbose=False)
+    tracker = BusTracker('northwestern', verbose=True)
     tracker.track()
 
 if __name__ == '__main__':
